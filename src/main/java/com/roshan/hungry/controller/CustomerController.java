@@ -6,10 +6,7 @@ import com.roshan.hungry.service.CustomerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RequiredArgsConstructor
@@ -26,5 +23,18 @@ public class CustomerController {
     @PostMapping("/login")
     public ResponseEntity<String> loginCustomer(@RequestBody @Valid CustomerLoginRequest loginRequest) {
         return ResponseEntity.ok(customerService.loginCustomer(loginRequest));
+    }
+
+    //@DeleteMapping("/delete/email")
+    /*
+    @PostMapping("/delete/email")
+    public ResponseEntity<String> deleteUserByEmail(@RequestBody @Valid CustomerDeleteRequest deleteRequest) {
+        return ResponseEntity.ok(customerService.deleteUserByEmail(deleteRequest));
+    }
+    */
+
+    @DeleteMapping ("/delete")
+    public ResponseEntity<String> deleteUserByEmail(@RequestParam String email) {
+        return ResponseEntity.ok(customerService.deleteUserByEmail(email));
     }
 }

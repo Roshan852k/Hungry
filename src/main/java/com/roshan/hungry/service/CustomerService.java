@@ -2,16 +2,13 @@ package com.roshan.hungry.service;
 
 import com.roshan.hungry.dto.CustomerRequest;
 import com.roshan.hungry.dto.CustomerLoginRequest;
-import com.roshan.hungry.dto.CustomerResponse;
 import com.roshan.hungry.entity.Customer;
 import com.roshan.hungry.helper.EncryptionService;
 import com.roshan.hungry.helper.JWTHelper;
 import com.roshan.hungry.mapper.CustomerMapper;
 import com.roshan.hungry.repo.CustomerRepo;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 @RequiredArgsConstructor
@@ -52,6 +49,23 @@ public class CustomerService {
             }
         } else {
             return "username not found";
+        }
+    }
+
+    /*
+    public String deleteUserByEmail(CustomerDeleteRequest deleteRequest) {
+        repo.deleteByEmail(deleteRequest.email());
+        return "Customer deleted successfully";
+    }
+    */
+
+    public String deleteUserByEmail(String email) {
+        Customer customer = repo.findByEmail(email);
+        if (customer != null) {
+            repo.delete(customer);
+            return "Customer deleted successfully";
+        } else {
+            return "Customer not found";
         }
     }
 }
