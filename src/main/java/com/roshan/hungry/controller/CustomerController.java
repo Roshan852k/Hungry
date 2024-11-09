@@ -2,6 +2,7 @@ package com.roshan.hungry.controller;
 
 import com.roshan.hungry.dto.CustomerRequest;
 import com.roshan.hungry.dto.CustomerLoginRequest;
+import com.roshan.hungry.dto.CustomerResponse;
 import com.roshan.hungry.service.CustomerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,11 @@ public class CustomerController {
     @PostMapping("/login")
     public ResponseEntity<String> loginCustomer(@RequestBody @Valid CustomerLoginRequest loginRequest) {
         return ResponseEntity.ok(customerService.loginCustomer(loginRequest));
+    }
+
+    @GetMapping("/{email}")
+    public ResponseEntity<CustomerResponse> getCustomer(@PathVariable("email") String email) {
+        return ResponseEntity.ok(customerService.retrieveCustomer(email));
     }
 
     //@DeleteMapping("/delete/email")

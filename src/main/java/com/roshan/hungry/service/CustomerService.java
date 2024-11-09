@@ -2,6 +2,7 @@ package com.roshan.hungry.service;
 
 import com.roshan.hungry.dto.CustomerRequest;
 import com.roshan.hungry.dto.CustomerLoginRequest;
+import com.roshan.hungry.dto.CustomerResponse;
 import com.roshan.hungry.entity.Customer;
 import com.roshan.hungry.helper.EncryptionService;
 import com.roshan.hungry.helper.JWTHelper;
@@ -9,6 +10,8 @@ import com.roshan.hungry.mapper.CustomerMapper;
 import com.roshan.hungry.repo.CustomerRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import static java.lang.String.format;
 
 @Service
 @RequiredArgsConstructor
@@ -51,6 +54,20 @@ public class CustomerService {
             return "username not found";
         }
     }
+
+    /*
+    public Customer getCustomer(String email) {
+        return repo.findByEmail(email)
+                .orElseThrow(() -> new CustomerNotFoundException(
+                        format("Cannot update Customer:: No customer found with the provided ID:: %s", email)
+                ));
+    }
+
+    public CustomerResponse retrieveCustomer(String email) {
+        Customer customer = getCustomer(email);
+        return mapper.toCustomerResponse(customer);
+    }
+    */
 
     /*
     public String deleteUserByEmail(CustomerDeleteRequest deleteRequest) {
