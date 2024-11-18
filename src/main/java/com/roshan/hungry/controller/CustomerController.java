@@ -23,6 +23,7 @@ public class CustomerController {
 
     @PostMapping("/login")
     public ResponseEntity<String> loginCustomer(@RequestBody @Valid CustomerLoginRequest loginRequest) {
+        System.out.println("login request");
         return ResponseEntity.ok(customerService.loginCustomer(loginRequest));
     }
 
