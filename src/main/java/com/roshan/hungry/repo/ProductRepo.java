@@ -15,6 +15,8 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
     Product findByProductID(@Param("id") Integer id);
      */
 
+    @Query("SELECT p FROM Product p WHERE p.price BETWEEN 50 AND 90 ORDER BY p.price")
+    List<Product> getTop2Product();
 
     Optional<Product> findByName(String name);
 
